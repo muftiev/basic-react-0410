@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import foldDecorator from '../decorators/fold'
+import CommentList from './comment-list'
 
 class Article extends PureComponent {
   render() {
@@ -25,7 +26,17 @@ class Article extends PureComponent {
   get body() {
     const { isOpen, article } = this.props
     if (isOpen === false) return null
-    return <section>{article.text}</section>
+    return (
+      <section>
+        <p>{article.text}</p>
+        {this.comments}
+      </section>
+    )
+  }
+
+  get comments() {
+    const { article } = this.props
+    return <CommentList comments={article.comments} />
   }
 }
 
