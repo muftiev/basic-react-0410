@@ -14,7 +14,7 @@ class ArticleList extends Component {
         <Article
           article={article}
           isOpen={openItemId === article.id}
-          toggleOpen={toggleOpenItem}
+          callback={toggleOpenItem}
         />
       </li>
     ))

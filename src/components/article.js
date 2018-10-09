@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react'
+import foldDecorator from '../decorators/fold'
 
 class Article extends PureComponent {
   render() {
     console.log('---', 'rendering article')
     const { article, isOpen } = this.props
-    const text = isOpen ? 'close' : 'open'
+    const text = isOpen ? 'hide' : 'show'
+
     return (
       <div>
         <h3 ref={this.setTitleRef}>{article.title}</h3>
@@ -18,13 +20,13 @@ class Article extends PureComponent {
     console.log('---', 'article title', ref)
   }
 
-  onButtonClick = () => this.props.toggleOpen(this.props.article.id)
+  onButtonClick = () => this.props.toggleFold(this.props.article.id)
 
   get body() {
     const { isOpen, article } = this.props
-    if (!isOpen) return null
+    if (isOpen === false) return null
     return <section>{article.text}</section>
   }
 }
 
-export default Article
+export default foldDecorator(Article)
