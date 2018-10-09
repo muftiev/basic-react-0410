@@ -4,6 +4,7 @@ import Select from 'react-select'
 import ArticleList from './article-list'
 import ArticleChart from './articles-chart'
 import UserForm from './user-form'
+import DayPickerRange from './day-picker-range'
 import articles from '../fixtures'
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           onChange={this.handleSelectionChange}
           isMulti
         />
+        <DayPickerRange />
         <ArticleList articles={articles} ref={this.setArticleListRef} />
         <ArticleChart articles={articles} />
       </div>
