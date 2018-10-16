@@ -1,8 +1,8 @@
 import React from 'react'
 import Enzyme, { render, shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import CommentListWithToggleOpen, { CommentList } from './comment-list'
-import articles from '../fixtures'
+import CommentListWithToggleOpen, { CommentList } from '.'
+import articles from '../../fixtures'
 
 Enzyme.configure({ adapter: new Adapter() })
 
