@@ -49,6 +49,7 @@ class CommentList extends Component {
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
+        {this.form}
       </div>
     )
   }
@@ -62,6 +63,15 @@ class CommentList extends Component {
           </li>
         ))}
       </ul>
+    )
+  }
+
+  get form() {
+    return (
+      <form>
+        <input type="text" name="comment-text" />
+        <button>Publish</button>
+      </form>
     )
   }
 }
