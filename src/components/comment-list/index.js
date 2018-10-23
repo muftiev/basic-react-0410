@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
+import PublishForm from '../publish-form'
 import toggleOpen from '../../decorators/toggleOpen'
+import { addComment } from '../../ac'
 import './style.css'
 
 class CommentList extends Component {
@@ -49,7 +52,7 @@ class CommentList extends Component {
         ) : (
           <h3 className="test--comment-list__empty">No comments yet</h3>
         )}
-        {this.form}
+        <PublishForm handler={this.submitComment.bind(this)} />
       </div>
     )
   }
@@ -66,14 +69,13 @@ class CommentList extends Component {
     )
   }
 
-  get form() {
-    return (
-      <form>
-        <input type="text" name="comment-text" />
-        <button>Publish</button>
-      </form>
-    )
+  submitComment(data) {
+    const { articleId, addComment } = this.props
+    addComment({ ...data, articleId })
   }
 }
 
-export default toggleOpen(CommentList)
+export default connect(
+  null,
+  { addComment }
+)(toggleOpen(CommentList))
