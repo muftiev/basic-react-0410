@@ -78,18 +78,20 @@ class CommentList extends Component {
   }
 
   componentDidUpdate(oldProps) {
-    const { isOpen, fetchData, comments, article } = this.props
+    const { isOpen, fetchData, comments = [], article } = this.props
     if (!oldProps.isOpen && isOpen && !comments.length && fetchData)
       fetchData(article.id)
   }
 }
 
+const createMapStateToProps = () => {
+  return (state, ownProps) => ({
+    comments: commentsSelector(state, ownProps),
+    loading: commentsLoadingSelector(state)
+  })
+}
+
 export default connect(
-  (state) => {
-    return {
-      comments: commentsSelector(state),
-      loading: commentsLoadingSelector(state)
-    }
-  },
+  createMapStateToProps(),
   { fetchData: loadAllComments }
 )(toggleOpen(CommentList))

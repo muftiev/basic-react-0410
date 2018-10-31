@@ -9,7 +9,14 @@ export const articleListSelector = createSelector(
   (articlesMap) => articlesMap.valueSeq().toArray()
 )
 export const commentsLoadingSelector = (state) => state.comments.loading
-export const commentsMapSelector = (state) => state.comments.entities
+export const commentsMapSelector = (state, props) => {
+  const commentsIdsList = props.article && props.article.get('comments')
+  return commentsIdsList
+    ? state.comments.entities.filter((comment) =>
+        commentsIdsList.includes(comment.id)
+      )
+    : state.comments.entities
+}
 export const commentsSelector = createSelector(
   commentsMapSelector,
   (commentsMap) => commentsMap.valueSeq().toArray()
