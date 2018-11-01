@@ -27,7 +27,7 @@ class App extends Component {
           </div>
         </nav>
         <UserForm />
-        <Route path="/counter" component={Counter} />
+        <Route path="/counter" component={Counter} exact />
         <Route path="/filters" component={Filters} />
         <Route path="/articles" component={ArticlesPage} />
       </div>

@@ -17,7 +17,7 @@ class Article extends PureComponent {
       text: PropTypes.string
     }),
     isOpen: PropTypes.bool,
-    toggleOpen: PropTypes.func.isRequired
+    toggleOpen: PropTypes.func
   }
 
   state = {
