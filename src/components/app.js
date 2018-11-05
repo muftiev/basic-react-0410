@@ -4,6 +4,7 @@ import ArticlesPage from './routes/articles-page'
 import UserForm from './user-form'
 import Filters from './filters'
 import Counter from './counter'
+import CommentsPage from './routes/comments-page'
 
 class App extends Component {
   render() {
@@ -25,11 +26,17 @@ class App extends Component {
               counter
             </NavLink>
           </div>
+          <div>
+            <NavLink to="/comments/1" activeStyle={{ color: 'red' }}>
+              comments
+            </NavLink>
+          </div>
         </nav>
         <UserForm />
 
         <Switch>
           <Route path="/counter" component={Counter} exact />
+          <Route path="/comments" component={CommentsPage} />
           <Route path="/filters" component={Filters} />
           <Route
             path="/articles/new"
