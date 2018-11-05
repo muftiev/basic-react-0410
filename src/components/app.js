@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, NavLink, Switch } from 'react-router-dom'
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import ArticlesPage from './routes/articles-page'
 import UserForm from './user-form'
 import Filters from './filters'
@@ -35,6 +35,7 @@ class App extends Component {
         <UserForm />
 
         <Switch>
+          <Redirect from="/" exact to="/articles" />
           <Route path="/counter" component={Counter} exact />
           <Route path="/comments" component={CommentsPage} />
           <Route path="/filters" component={Filters} />
