@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import ArticlesPage from './routes/articles-page'
 import UserForm from './user-form'
 import Filters from './filters'
 import Counter from './counter'
 import CommentsPage from './routes/comments-page'
+import Menu, { MenuItem } from './menu'
 import { Provider as UserProvider } from '../contexts/user'
 
 class App extends Component {
@@ -18,28 +19,12 @@ class App extends Component {
     return (
       <UserProvider value={this.state.user}>
         <div>
-          <nav>
-            <div>
-              <NavLink to="/articles" activeStyle={{ color: 'red' }}>
-                articles
-              </NavLink>
-            </div>
-            <div>
-              <NavLink to="/filters" activeStyle={{ color: 'red' }}>
-                filters
-              </NavLink>
-            </div>
-            <div>
-              <NavLink to="/counter" activeStyle={{ color: 'red' }}>
-                counter
-              </NavLink>
-            </div>
-            <div>
-              <NavLink to="/comments/1" activeStyle={{ color: 'red' }}>
-                comments
-              </NavLink>
-            </div>
-          </nav>
+          <Menu>
+            <MenuItem link="/articles" children="Articles" />
+            <MenuItem link="/filters">Filters</MenuItem>
+            <MenuItem link="/counter">Counter</MenuItem>
+            <MenuItem link="/comments">Comments</MenuItem>
+          </Menu>
           <UserForm value={this.state.user} onChange={this.setUser} />
 
           <Switch>
