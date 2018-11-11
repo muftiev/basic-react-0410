@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MenuItem from './menu-item'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 class Menu extends Component {
   static propTypes = {}
@@ -7,7 +8,9 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <h2>Main Menu</h2>
+        <LocalizationConsumer>
+          {(localization) => <h2>{localization.main_menu}</h2>}
+        </LocalizationConsumer>
         <nav>{this.props.children}</nav>
       </div>
     )

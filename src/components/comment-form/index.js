@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addComment } from '../../ac'
 import './style.css'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 class CommentForm extends Component {
   static propTypes = {}
@@ -14,19 +15,31 @@ class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        user:{' '}
+        <LocalizationConsumer>
+          {(localization) => <label>{localization.user}: </label>}
+        </LocalizationConsumer>
         <input
           value={this.state.user}
           onChange={this.handleChange('user')}
           className={this.getClassName('user')}
         />
-        comment:{' '}
+        <LocalizationConsumer>
+          {(localization) => <label>{localization.comment}: </label>}
+        </LocalizationConsumer>
         <input
           value={this.state.text}
           onChange={this.handleChange('text')}
           className={this.getClassName('text')}
         />
-        <input type="submit" value="submit" disabled={!this.isValidForm()} />
+        <LocalizationConsumer>
+          {(localization) => (
+            <input
+              type="submit"
+              value={localization.publish}
+              disabled={!this.isValidForm()}
+            />
+          )}
+        </LocalizationConsumer>
       </form>
     )
   }

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import ArticleList from '../article-list'
 import { Route } from 'react-router-dom'
 import Article from '../article'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 class ArticlesPage extends Component {
   static propTypes = {}
@@ -21,7 +22,12 @@ class ArticlesPage extends Component {
   getArticle = ({ match }) => {
     console.log('---', 'article match: ', match)
 
-    if (!match) return <h1>Please Select An Article</h1>
+    if (!match)
+      return (
+        <LocalizationConsumer>
+          {(localization) => <h1>{localization.please_select_an_article}</h1>}
+        </LocalizationConsumer>
+      )
 
     const { id } = match.params
     return <Article id={id} key={id} isOpen />

@@ -2,12 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createCommentSelector } from '../selectors'
+import { Consumer as LocalizationConsumer } from '../contexts/localization'
 
 function Comment({ comment }) {
   return (
-    <div>
-      {comment.text} <b>by {comment.user}</b>
-    </div>
+    <LocalizationConsumer>
+      {(localization) => (
+        <div>
+          {comment.text}{' '}
+          <b>
+            {localization.by} {comment.user}
+          </b>
+        </div>
+      )}
+    </LocalizationConsumer>
   )
 }
 

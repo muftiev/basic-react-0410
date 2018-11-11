@@ -1,7 +1,12 @@
 import React from 'react'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 function Loader() {
-  return <h3>Loading...</h3>
+  return (
+    <LocalizationConsumer>
+      {(localization) => <h3>{localization.loading}</h3>}
+    </LocalizationConsumer>
+  )
 }
 
 Loader.propTypes = {}

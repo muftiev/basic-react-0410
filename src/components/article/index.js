@@ -7,6 +7,7 @@ import { deleteArticle, loadArticleById } from '../../ac'
 import './style.css'
 import Loader from '../common/loader'
 import { articleSelector } from '../../selectors'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 class Article extends PureComponent {
   static propTypes = {
@@ -41,7 +42,13 @@ class Article extends PureComponent {
       <div>
         <h3>
           {article.title}
-          <button onClick={this.handleDeleteClick}>delete me</button>
+          <LocalizationConsumer>
+            {(localization) => (
+              <button onClick={this.handleDeleteClick}>
+                {localization.delete_me}
+              </button>
+            )}
+          </LocalizationConsumer>
         </h3>
         <CSSTransition
           transitionAppear
@@ -64,7 +71,12 @@ class Article extends PureComponent {
   get body() {
     const { isOpen, article } = this.props
     if (!isOpen) return null
-    if (this.state.error) return <h3>Error</h3>
+    if (this.state.error)
+      return (
+        <LocalizationConsumer>
+          {(localization) => <h3>{localization.error}</h3>}
+        </LocalizationConsumer>
+      )
     if (article.loading) return <Loader />
 
     return (

@@ -9,6 +9,7 @@ import { loadArticleComments } from '../../ac'
 import './style.css'
 import Loader from '../common/loader'
 import { Consumer as UserConsumer } from '../../contexts/user'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 class CommentList extends Component {
   static propTypes = {
@@ -37,12 +38,15 @@ class CommentList extends Component {
 
   render() {
     const { isOpen, toggleOpen } = this.props
-    const text = isOpen ? 'hide comments' : 'show comments'
     return (
       <div>
-        <button onClick={toggleOpen} className="test__comment-list--btn">
-          {text}
-        </button>
+        <LocalizationConsumer>
+          {(localization) => (
+            <button onClick={toggleOpen} className="test__comment-list--btn">
+              {isOpen ? localization.hide_comments : localization.show_comments}
+            </button>
+          )}
+        </LocalizationConsumer>
         <CSSTransition
           transitionName="comments"
           transitionEnterTimeout={500}
@@ -66,12 +70,26 @@ class CommentList extends Component {
     return (
       <div className="test__comment-list--body">
         <UserConsumer>
-          {(username) => <h3>Username: {username}</h3>}
+          {(username) => (
+            <LocalizationConsumer>
+              {(localization) => (
+                <h3>
+                  {localization.username}: {username}
+                </h3>
+              )}
+            </LocalizationConsumer>
+          )}
         </UserConsumer>
         {comments.length ? (
           this.comments
         ) : (
-          <h3 className="test__comment-list--empty">No comments yet</h3>
+          <LocalizationConsumer>
+            {(localization) => (
+              <h3 className="test__comment-list--empty">
+                {localization.no_comments_yet}
+              </h3>
+            )}
+          </LocalizationConsumer>
         )}
         <CommentForm articleId={id} />
       </div>

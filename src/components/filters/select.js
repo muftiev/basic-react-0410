@@ -4,6 +4,7 @@ import Select from 'react-select'
 import { connect } from 'react-redux'
 import { changeSelection } from '../../ac'
 import { articleListSelector, selectionSelector } from '../../selectors'
+import { Consumer as LocalizationConsumer } from '../../contexts/localization'
 
 class SelectFilter extends Component {
   static propTypes = {
@@ -23,12 +24,17 @@ class SelectFilter extends Component {
 
   render() {
     return (
-      <Select
-        options={this.options}
-        value={this.props.selected}
-        onChange={this.handleChange}
-        isMulti
-      />
+      <LocalizationConsumer>
+        {(localization) => (
+          <Select
+            options={this.options}
+            value={this.props.selected}
+            onChange={this.handleChange}
+            isMulti
+            placeholder={localization.select_placeholder}
+          />
+        )}
+      </LocalizationConsumer>
     )
   }
 }
